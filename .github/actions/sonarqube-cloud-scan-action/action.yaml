@@ -91,7 +91,7 @@ runs:
         echo "https://docs.sonarsource.com/sonarqube-cloud/advanced-setup/analysis-parameters/" \
           >> "$GITHUB_STEP_SUMMARY"
         # Create an ephemeral configuration file
-        echo "sonar.organization=${{ steps.repository-metadata.outputs.repository_owner }} > sonar-project.properties
+        echo "sonar.organization=${{ steps.repository-metadata.outputs.repository_owner }}" > sonar-project.properties
         echo "sonar.projectKey=${{ steps.repository-metadata.outputs.repository_name }}" >> sonar-project.properties
         echo "Created: sonar-project.properties"
         echo "Containing:"
