@@ -18,6 +18,6 @@ jobs:
   sonarqube-cloud:
     name: "SonarQube Cloud"
     # yamllint disable-line rule:line-length
-    uses: .github/workflows/reuse-sonarqube-cloud.yaml
+    uses: modeseven-o-ran-sc/o-du-l2/.github/workflows/reuse-sonarqube-cloud.yaml@main
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
