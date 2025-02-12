@@ -100,7 +100,7 @@ runs:
     - name: "SonarQube configuration present"
       if:
         # yamllint disable-line rule:line-length
-        steps.sonar-project-properties.outputs.type = 'file' || steps.sonarcloud-properties.outputs.type = 'file'
+        steps.sonar-project-properties.outputs.type == 'file' || steps.sonarcloud-properties.outputs.type == 'file'
       shell: bash
       run: |
         # SonarQube configuration present
