@@ -11,6 +11,17 @@ Uploads the results to either the cloud service or an on-premise/hosted server.
 
 ## sonarqube-cloud-scan-action
 
+## Required Credentials
+
+The scanning action requires access to an API key for it to produce results.
+Most projects configure this at the GitHub organisation level as:
+
+`SONAR_TOKEN`
+
+Optionally, set it at the repository level, but it MUST be available in the
+Github environment for scans to produce results. For projects using Jenkins,
+the same credential must be available to Jenkins jobs.
+
 ## Usage Example: Action
 
 <!-- markdownlint-disable MD013 -->
@@ -21,18 +32,18 @@ jobs:
     name: "SonarQube Cloud Scan"
     runs-on: ubuntu-24.04
     permissions:
-      # Needed to upload the results to code-scanning dashboard
-      security-events: write
-      # Needed to publish results and get a badge (see publish_results below)
-      id-token: write
-      # Uncomment these below if installing in a private repository
-      # contents: read
-      # actions: read
+        # Needed to upload the results to code-scanning dashboard
+        security-events: write
+        # Needed to publish results and get a badge (see publish_results below)
+        id-token: write
+        # Uncomment these below if installing in a private repository
+        # contents: read
+        # actions: read
     steps:
       - name: "SonarQube Cloud Scan"
         uses: lfit-releng-reusable-workflows/.github/actions/sonarqube-cloud-scan-action@main
         with:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 ```
 
 <!-- markdownlint-enable MD013 -->
@@ -43,22 +54,33 @@ See: <https://github.com/lfit/releng-reusable-workflows/blob/main/.github/workfl
 
 ## Repository Contents and Scan Configuration
 
-Ideally, you should provide hints to the SonarQube Cloud scan as to how your
-project/repository is setup. Accurate scans need to know where your source
-is located (which directory) and sometimes how to build it. For certain project
-types, a wrapper script containing shell code should be provided in order to
-invoke a build step or process. The build wrapper script path can be provided
-to the scanning action.
+Provide information to the scanning action so that it understands how the
+project/repository is setup. The accuracy of scans improves when provided with
+the source code location (local directory) and for specific project types,
+how to build it. For example, projects written in C (and related family of
+languages) may need a wrapper script to invoke a build step/process. Provide
+the path to the build wrapper either as arguments to the action, or add it
+to the local repository configuration file.
 
-Usually, you need to configure the scan by creating one of these two files:
+Configure the scan parameters by creating either of these two files:
 
-* sonar-project.properties
-* sonarcloud.properties
+- sonar-project.properties
+- sonarcloud.properties
 
-For details on populating them with the required information, refer to the
-documentation links in the section below.
+As a temporary measure, in the absence of a configuration file, the scan action
+will populate the file with these two parameters, enumerated at runtime:
 
-# Upstream Documentation
+```console
+sonar.organization=[GITHUB REPOSITORY OWNER]
+sonar.projectKey=[GITHUB REPOSITORY NAME]
+```
+
+This ensures that an initial scan for the repository will produce results in
+portal. For further details on populating the scan configuration file with
+the required information, refer to the documentation links in the section
+below.
+
+# SonarQube Cloud Documentation
 
 See: <https://github.com/SonarSource/sonarqube-scan-action>
 
