@@ -46,7 +46,11 @@ runs:
 
         # Process inputs, set variable/parameters
         URL="${{ inputs.url }}"
-        if [[ "f${{ inputs.no_clobber }}" = "ftrue" ]]; then
+        # Case insensitive matching
+        EXIT_ON_FAIL="${{ inputs.exit_on_fail }}"
+        NO_CLOBBER="${{ inputs.no_clobber }}"
+
+        if [[ "f${NO_CLOBBER,,}" = "ftrue" ]]; then
           WGET_FLAGS="--no-clobber"
         fi
         if [ -n "${{ inputs.path }}" ]; then
@@ -65,7 +69,7 @@ runs:
           echo "Content successfully downloaded ✅"
         else
           echo "Error: content download failed ❌"
-          if [[ "f${{ inputs.exit_on_fail }}" = "ftrue" ]]; then
+          if [[ "f${EXIT_ON_FAIL,,}" = "ftrue" ]]; then
             # Dependent on the action's inputs
             exit 1
           fi
