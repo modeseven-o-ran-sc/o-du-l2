@@ -3,4 +3,5 @@ sudo apt-get -y update
 sudo apt-get -y install libnsl-dev libxml2-dev libsctp-dev libpcap-dev
 cd build; make
 cd -
+echo "Build wrapper output file location:"
 find . -name compile_commands.json
