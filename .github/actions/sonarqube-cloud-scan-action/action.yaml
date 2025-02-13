@@ -125,6 +125,7 @@ runs:
       shell: bash
       run: |
         # Run Build Wrapper 🛠️
+        set -vx
         WGET_CMD=$(which wget)
         if [ ! -x "$WGET_CMD" ]; then
           echo "WGET command was not available ❌"; exit 1
