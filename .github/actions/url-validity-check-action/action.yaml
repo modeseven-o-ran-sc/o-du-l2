@@ -8,7 +8,7 @@ description: "Tests a give URL for a valid server response"
 
 inputs:
   URL:
-    description: "URL prefix to check"
+    description: "Remote URL to check"
     required: true
 
 outputs:
@@ -43,8 +43,8 @@ runs:
       # yamllint disable rule:line-length
       run: |
         # Check URL for Validity
-        if (wget ${{ inputs.URL }} --spider -q); then
-          echo "URL/location WAS found and valid ✅"
+        if (wget ${{ inputs.url }} --spider -q); then
+          echo "URL/location was found and valid ✅"
           echo "valid=true" >> "$GITHUB_OUTPUT"
         else
           echo "URL/location was NOT found/valid ❌"
