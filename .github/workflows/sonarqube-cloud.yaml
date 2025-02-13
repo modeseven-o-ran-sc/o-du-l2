@@ -23,4 +23,4 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     with:
       # yamllint disable-line rule:line-length
-      build_wrapper_urlL="https://raw.githubusercontent.com/modeseven-o-ran-sc/o-du-l2/refs/heads/main/sonarqube-cloud-build.sh"
+      build_wrapper_url="https://raw.githubusercontent.com/modeseven-o-ran-sc/o-du-l2/refs/heads/main/sonarqube-cloud-build.sh"
