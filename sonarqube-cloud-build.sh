@@ -2,3 +2,5 @@
 sudo apt-get -y update
 sudo apt-get -y install libnsl-dev libxml2-dev libsctp-dev libpcap-dev
 cd build; make
+cd -
+find . -name compile_commands.json
