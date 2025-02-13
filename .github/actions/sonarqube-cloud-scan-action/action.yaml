@@ -111,7 +111,7 @@ runs:
       id: url-validity-check-action
       if: inputs.BUILD_WRAPPER_URL != ''
       # yamllint disable-line rule:line-length
-      uses: lfit/releng-reusable-workflows/.github/actions/url-validity-check-action@a54eb06d062f1ddfb4fbeb9655c185482fe1d375 # 2025-02-05
+      uses: ./.github/actions/url-validity-check-action # local testing
       with:
         url: ${{ inputs.build_wrapper_url }}
 
