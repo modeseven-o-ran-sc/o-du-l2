@@ -3,8 +3,8 @@
 # SPDX-FileCopyrightText: 2025 The Linux Foundation
 
 # url-download-action
-name: "🌍 Check URL for Validity with WGET"
-description: "Uses WGET to downloads the content at a given URL"
+name: "🌍 Download Content from URL"
+description: "Uses WGET to download the content at a given URL"
 
 inputs:
   # Mandatory
@@ -46,10 +46,10 @@ runs:
 
         # Process inputs, set variable/parameters
         URL="${{ inputs.url }}"
-        if [ "${{ inputs.no_clobber }}" ]; then
+        if [[ "f${{ inputs.no_clobber }}" = "ftrue" ]]; then
           WGET_FLAGS="--no-clobber"
         fi
-        if [ "${{ inputs.path }}" ]; then
+        if [ -n "${{ inputs.path }}" ]; then
           WGET_FLAGS="$WGET_FLAGS -O ${{ inputs.path }}"
         fi
 
@@ -65,8 +65,8 @@ runs:
           echo "Content successfully downloaded ✅"
         else
           echo "Error: content download failed ❌"
-          if [ "${{ inputs.exit_on_fail }}" ]; then
-            # This is dependent on the action's inputs
+          if [[ "f${{ inputs.exit_on_fail }}" = "ftrue" ]]; then
+            # Dependent on the action's inputs
             exit 1
           fi
         fi
