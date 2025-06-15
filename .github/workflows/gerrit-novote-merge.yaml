@@ -31,3 +31,4 @@ jobs:
       NEXUS_IQ_PASSWORD: ${{ secrets.NEXUS_IQ_PASSWORD }}
     with:
       debug: true
+      application_id: o-ran-sc-o-du-l2
