@@ -15,7 +15,7 @@ jobs:
   call-cmake-sonarqube-cloud:
     name: "SonarQube Cloud"
     # yamllint disable-line rule:line-length
-    uses: lfit/releng-reusable-workflows/.github/workflows/reuse-sonarqube-cloud.yaml@main
+    uses: modeseven-lfit/releng-reusable-workflows/.github/workflows/reuse-sonarqube-cloud.yaml@update-security-scans # Testing
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     with:
@@ -26,7 +26,7 @@ jobs:
   call-sonartype-lifecycle:
     name: "Sonatype Lifecycle Scan"
     # yamllint disable-line rule:line-length
-    uses: lfit/releng-reusable-workflows/.github/workflows/reuse-sonatype-lifecycle.yaml@f609c3ba47c08cff77f5bd8b59dab89758533fe1 # v0.2.15
+    uses: modeseven-lfit/releng-reusable-workflows/.github/workflows/reuse-sonatype-lifecycle.yaml@update-security-scans # Testing
     secrets:
       NEXUS_IQ_PASSWORD: ${{ secrets.NEXUS_IQ_PASSWORD }}
     with:
